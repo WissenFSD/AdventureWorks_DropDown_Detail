@@ -1,0 +1,44 @@
+﻿@model GetViewModel
+
+
+
+@using(Html.BeginForm("Index","Home",FormMethod.Post,new {@class="form"}))
+{
+<div class="div">
+
+	@Html.DropDownListFor(s => s.SeletedId, Model.Products, "Lütfen seçiniz..", new {@class="drop"})
+	@Html.HiddenFor(s=>s.SeletedId)
+
+</div>
+<div class="div">
+	@if (Model.Detail != null)
+	{
+		@foreach (var item in Model.Detail)
+		{
+			
+			<div style="width:50%;float:left;">@item.Name :</div>
+			<div style="width:50%;float:left;">@item.Value</div>
+		}
+
+	}
+</div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+
+	$(document).ready(function () {
+
+
+		$(".drop").change(function () { 
+		
+			$(".form").submit();
+		
+		});
+
+		
+
+	});
+
+</script>
