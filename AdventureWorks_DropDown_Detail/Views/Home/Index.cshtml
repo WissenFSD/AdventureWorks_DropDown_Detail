@@ -4,20 +4,20 @@
 
 @using(Html.BeginForm("Index","Home",FormMethod.Post,new {@class="form"}))
 {
-<div class="div">
+<div class="div1">
 
 	@Html.DropDownListFor(s => s.SeletedId, Model.Products, "Lütfen seçiniz..", new {@class="drop"})
 	@Html.HiddenFor(s=>s.SeletedId)
 
 </div>
-<div class="div">
+<div class="div2">
 	@if (Model.Detail != null)
 	{
 		@foreach (var item in Model.Detail)
 		{
 			
-			<div style="width:50%;float:left;">@item.Name :</div>
-			<div style="width:50%;float:left;">@item.Value</div>
+			<p style="width:50%;float:left;">@item.Name :</p>
+			<p style="width:50%;float:left;">@item.Value</p>
 		}
 
 	}
@@ -31,9 +31,16 @@
 	$(document).ready(function () {
 
 
-		$(".drop").change(function () { 
-		
-			$(".form").submit();
+		$(".drop").change(function () {
+			$(".div2").slideUp("slow");
+
+
+			sleep(2000).then(() => { debugger; $(".div2").slideDown("slow"); });
+			
+
+			sleep(2000).then(() => { $(".form").submit(); });
+
+			
 		
 		});
 

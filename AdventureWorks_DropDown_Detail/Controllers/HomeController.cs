@@ -60,13 +60,26 @@ namespace AdventureWorks_DropDown_Detail.Controllers
 			{
 				foreach (var p in item.GetType().GetProperties())
 				{
-
-					detail.Add(new ProductDetail()
+					if(p.Name== "ModifiedDate")
 					{
+						//Modified date sonrasýnda gelen property'ler eklenmesin
+						break;
+					}
 
-						Name = p.Name,
-						Value = p.GetValue(item, null)
-					}); 
+
+					ProductDetail productDetail = new ProductDetail();
+					productDetail.Name = p.Name;
+					if(p.GetValue(item, null) == null)
+					{
+						productDetail.Value = "Deðer yok!";
+					}
+					else
+					{
+						productDetail.Value = p.GetValue(item, null).ToString();
+					}
+
+
+					detail.Add(productDetail);
 				
 
 					 
